@@ -1,7 +1,7 @@
 // Launch Configuration
 resource "aws_launch_configuration" "lc" {
   lifecycle {
-    create_before_destroy = "${var.create_before_destroy}"
+    create_before_destroy = true
   }
 
   security_groups = ["${split(",", var.security_groups)}"]
