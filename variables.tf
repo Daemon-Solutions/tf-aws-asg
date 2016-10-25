@@ -14,6 +14,7 @@ variable "user_data" {
 }
 variable "associate_public_ip_address" { default = false }
 variable "detailed_monitoring" { default = false }
+variable "create_before_destory" { default = true }
 
 // Auto-Scaling Group
 variable "subnets" { }
