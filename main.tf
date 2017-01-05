@@ -4,8 +4,7 @@ resource "aws_launch_configuration" "lc" {
     create_before_destroy = true
   }
 
-  security_groups = ["${split(",", var.security_groups)}"]
-
+  security_groups = ["${var.security_groups}"]
   image_id = "${var.ami_id}"
   instance_type = "${var.instance_type}"
   iam_instance_profile = "${var.iam_instance_profile}"
@@ -18,8 +17,8 @@ resource "aws_launch_configuration" "lc" {
 // Auto-Scaling Group Configuration
 resource "aws_autoscaling_group" "asg" {
   name = "${var.name}"
-  availability_zones = ["${split(",", var.availability_zones)}"]
-  vpc_zone_identifier = ["${split(",", var.subnets)}"]
+  availability_zones = ["${var.availability_zones}"]
+  vpc_zone_identifier = ["${var.subnets}"]
 
   // Use the Name from the launch config created above
   launch_configuration = "${aws_launch_configuration.lc.name}"
