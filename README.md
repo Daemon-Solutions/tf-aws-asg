@@ -80,7 +80,7 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 * `health_check_type` - Should be `EC2` or `ELB` (default: `EC2`)
 * `health_check_grace_period` - Delay before checking instance health
 * `load_balancers` - List of ELBs
-
+* `target_group_arns` - A list of aws_alb_target_group ARNs, for use with Application Load Balancing
 
 
 ## Outputs
