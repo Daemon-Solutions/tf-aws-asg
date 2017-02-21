@@ -101,3 +101,8 @@ variable "load_balancers" {
   type    = "list"
   default = []
 }
+
+variable "target_group_arns" {
+  type    = "list"
+  default = []
+}

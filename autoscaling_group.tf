@@ -4,6 +4,7 @@ resource "aws_autoscaling_group" "asg" {
 
   launch_configuration = "${aws_launch_configuration.lc.name}"
   load_balancers       = "${var.load_balancers}"
+  target_group_arns    = ["${var.target_group_arns}"]
 
   min_size             = "${var.min}"
   max_size             = "${var.max}"
