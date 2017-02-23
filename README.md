@@ -85,9 +85,12 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 
 ## Outputs
 
-* `launch_config_id`
-* `asg_id`
-* `asg_name`
+`asg_name` - Autoscaling group name
+`asg_id` - Autoscaling group id
+`launch_config_id` - Launch configuration id
+`scale_up_alarm` - CloudWatch alarm for scaling up
+`scale_down_alarm` - CloudWatch alarm for scaling down
+
 
 # Testing
 

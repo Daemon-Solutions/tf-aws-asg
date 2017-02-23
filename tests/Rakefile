@@ -1,0 +1,8 @@
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new('spec')
+task :default => :spec
+task :test => :spec
+task :destroy do
+	Dir.chdir('terraform')
+	system('terraform destroy -force') or raise 'Terraform destroy failed'
+end
