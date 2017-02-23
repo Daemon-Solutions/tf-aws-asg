@@ -35,7 +35,7 @@ data "template_cloudinit_config" "config" {
   }
 }
 
-module "public-asg" {
+module "public_asg" {
   source                      = "../../"
   name                        = "awspec-testing-public"
   envname                     = "foo"
@@ -47,7 +47,7 @@ module "public-asg" {
   user_data                   = "${data.template_cloudinit_config.config.rendered}"
 }
 
-module "private-asg" {
+module "private_asg" {
   source                      = "../../"
   name                        = "awspec-testing-private"
   envname                     = "foo"
@@ -62,4 +62,16 @@ module "private-asg" {
   cpu_scale_up                = "50"
   cpu_scale_down              = "20"
   user_data                   = "${data.template_cloudinit_config.config.rendered}"
+}
+
+output "public_asg_id" {
+  value = "${module.public_asg.asg_id}"
+}
+
+output "private_asg_id" {
+  value = "${module.private_asg.asg_id}"
+}
+
+output "security_group_id" {
+  value = "${aws_security_group.allow_all.id}"
 }
