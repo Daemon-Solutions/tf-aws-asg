@@ -3,7 +3,7 @@ resource "aws_autoscaling_group" "asg" {
   vpc_zone_identifier = ["${var.subnets}"]
 
   launch_configuration = "${aws_launch_configuration.lc.name}"
-  load_balancers       = "${var.load_balancers}"
+  load_balancers       = ["${var.load_balancers}"]
   target_group_arns    = ["${var.target_group_arns}"]
 
   min_size             = "${var.min}"
