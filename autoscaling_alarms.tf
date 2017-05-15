@@ -23,6 +23,8 @@ resource "aws_cloudwatch_metric_alarm" "scale_alarm_up" {
 
   alarm_description = "Alarm to scale up ${var.name}"
   alarm_actions     = ["${aws_autoscaling_policy.scale_policy_up.arn}"]
+
+  depends_on = ["aws_cloudwatch_metric_alarm.scale_alarm_down"]
 }
 
 resource "aws_autoscaling_policy" "scale_policy_down" {
