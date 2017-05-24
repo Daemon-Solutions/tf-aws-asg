@@ -106,3 +106,9 @@ variable "target_group_arns" {
   type    = "list"
   default = []
 }
+
+variable "enabled_metrics" {
+  description = "A list of metrics to collect. The allowed values are GroupMinSize, GroupMaxSize, GroupDesiredCapacity, GroupInServiceInstances, GroupPendingInstances, GroupStandbyInstances, GroupTerminatingInstances, GroupTotalInstances"
+  type        = "list"
+  default     = []
+}
