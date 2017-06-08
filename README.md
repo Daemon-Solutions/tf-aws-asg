@@ -88,6 +88,7 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 
 `asg_name` - Autoscaling group name
 `asg_id` - Autoscaling group id
+`asg_arn` - Autoscaling group ARN
 `launch_config_id` - Launch configuration id
 `scale_up_alarm` - CloudWatch alarm for scaling up
 `scale_down_alarm` - CloudWatch alarm for scaling down
