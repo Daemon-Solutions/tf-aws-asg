@@ -112,3 +112,7 @@ variable "enabled_metrics" {
   type        = "list"
   default     = []
 }
+
+variable "patch_group" {
+  default = ""
+}
