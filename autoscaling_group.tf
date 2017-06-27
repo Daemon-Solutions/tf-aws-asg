@@ -48,6 +48,4 @@ resource "aws_autoscaling_group" "asg" {
     propagate_at_launch = true
   }
   
-  tags = "${merge(var.default_tags, map('EnvironmentType', '${var.envtype}', map('EnvironmentName', '${var.envname}', map('Profile', '${var.profile}')}"
-  
 }
