@@ -116,3 +116,8 @@ variable "enabled_metrics" {
 variable "patch_group" {
   default = ""
 }
+
+variable "extra_tags" {
+  description = "Extra tags for the ASG"
+  default     = []
+}
