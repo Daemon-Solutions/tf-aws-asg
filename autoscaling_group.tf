@@ -16,36 +16,31 @@ resource "aws_autoscaling_group" "asg" {
 
   enabled_metrics = ["${var.enabled_metrics}"]
 
-  tag {
-    key = "Name"
+  tags = [
+    {
+      key                 = "Name"
+      value               = "${var.name}"
+      propagate_at_launch = true
+    },
+    {
+      key                 = "Environment"
+      value               = "${var.envname}"
+      propagate_at_launch = true
+    },
+    {
+      key                 = "Service"
+      value               = "${var.service}"
+      propagate_at_launch = true
+    },
+  ]
 
-    value = "${var.name}"
+  tags = ["${var.extra_tags}"]
 
-    propagate_at_launch = true
-  }
-
-  tag {
-    key = "Environment"
-
-    value = "${var.envname}"
-
-    propagate_at_launch = true
-  }
-
-  tag {
-    key = "Service"
-
-    value = "${var.service}"
-
-    propagate_at_launch = true
-  }
-
-  tag {
-    key = "Patch Group"
-
-    value = "${var.patch_group}"
-
-    propagate_at_launch = true
-  }
-  
+  # Include the Patch Group tag when var.patch_group is provided.
+  # Done this way because of https://github.com/hashicorp/terraform/issues/12453
+  tags = ["${slice(
+    list(map("key", "Patch Group", "value", var.patch_group, "propagate_at_launch", true)),
+    var.patch_group == "" ? 1 : 0,
+    1,
+  )}"]
 }
