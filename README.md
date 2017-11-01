@@ -70,8 +70,8 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 * `autoscaling` - Boolean, whether to enable CPU based auto scaling
 * `cpu_scale_up` - CPU % to scale up at if `autoscaling` true (default: `60`)
 * `cpu_scale_down` - CPU % to scale down at, if `autoscaling` true (default: `20`)
-* `scale_miutes_up` - Scale up when CPU above threshold for this number of minutes (default: `5`)
-* `scale_miutes_down` - Scale down when CPU above threshold for this number of minutes (default: `20`)
+* `scale_minutes_up` - Scale up when CPU above threshold for this number of minutes (default: `5`)
+* `scale_minutes_down` - Scale down when CPU above threshold for this number of minutes (default: `20`)
 * `scale_factor_up` - Number of instances to add when scaling up (default: `1`)
 * `scale_factor_down` - Number of instances to add when scaling down, should be a negative number (default: `-1`)
 * `scale_statistic` - Statistic to use for scaling up/down - SampleCount, Average, Sum, Minimum or Maximum (default: `Maximum`)
