@@ -185,7 +185,7 @@ variable "enabled_metrics" {
 
 variable "patch_group" {
   description = "Adds a 'Patch Group' tag to the ASG with this value"
-  type    = "list"
+  type    = "string"
   default = ""
 }
 
