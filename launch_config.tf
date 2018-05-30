@@ -13,4 +13,7 @@ resource "aws_launch_configuration" "lc" {
   associate_public_ip_address = "${var.associate_public_ip_address}"
   enable_monitoring           = "${var.detailed_monitoring}"
   user_data                   = "${var.user_data}"
+  ebs_block_device            = "${var.ebs_block_device}"
+  ephemeral_block_device      = "${var.ephemeral_block_device}"
+  root_block_device           = "${var.root_block_device}"
 }
