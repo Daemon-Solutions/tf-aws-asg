@@ -64,6 +64,24 @@ module "private_asg" {
   user_data                   = "${data.template_cloudinit_config.config.rendered}"
 }
 
+module "private_asg_tracked_scaling" {
+  source                      = "../../"
+  name                        = "awspec-testing-tracked-private"
+  envname                     = "foo"
+  service                     = "bar"
+  subnets                     = ["${module.vpc.private_subnets}"]
+  security_groups             = ["${aws_security_group.allow_all.id}"]
+  ami_id                      = "ami-a85165db"
+  associate_public_ip_address = false
+  min                         = 1
+  max                         = 3
+  autoscaling                 = true
+  scaling_policy_type         = "TargetTrackingScaling"
+  target_tracking_target_cpu  = "60"
+  warmup_seconds              = "30"
+  user_data                   = "${data.template_cloudinit_config.config.rendered}"
+}
+
 output "public_asg_id" {
   value = "${module.public_asg.asg_id}"
 }

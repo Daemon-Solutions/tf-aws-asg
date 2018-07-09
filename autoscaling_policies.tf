@@ -1,5 +1,22 @@
+resource "aws_autoscaling_policy" "scale_policy_target_tracking" {
+  count                     = "${var.autoscaling && var.scaling_policy_type == "TargetTrackingScaling" ? 1 : 0}"
+  name                      = "${var.name}-target-tracking"
+  autoscaling_group_name    = "${aws_autoscaling_group.asg.name}"
+  policy_type               = "TargetTrackingScaling"
+  estimated_instance_warmup = "${var.warmup_seconds}"
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    disable_scale_in = false
+    target_value     = "${var.target_tracking_target_cpu}"
+  }
+}
+
 resource "aws_autoscaling_policy" "scale_policy_up" {
-  count                  = "${var.autoscaling ? 1 : 0}"
+  count                  = "${var.autoscaling && var.scaling_policy_type == "SimpleScaling" ? 1 : 0}"
   name                   = "${var.name}-scale-up"
   scaling_adjustment     = "${var.scale_factor_up}"
   adjustment_type        = "ChangeInCapacity"
@@ -7,7 +24,8 @@ resource "aws_autoscaling_policy" "scale_policy_up" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "scale_alarm_up" {
-  count               = "${var.autoscaling ? 1 : 0}"
+  count               = "${var.autoscaling && var.scaling_policy_type == "SimpleScaling" ? 1 : 0}"
+  name                = "${var.name}-scale-up"
   alarm_name          = "${var.name}-scale-up"
   period              = "60"
   evaluation_periods  = "${var.scale_minutes_up}"
@@ -28,7 +46,7 @@ resource "aws_cloudwatch_metric_alarm" "scale_alarm_up" {
 }
 
 resource "aws_autoscaling_policy" "scale_policy_down" {
-  count                  = "${var.autoscaling ? 1 : 0}"
+  count                  = "${var.autoscaling && var.scaling_policy_type == "SimpleScaling" ? 1 : 0}"
   name                   = "${var.name}-scale-down"
   scaling_adjustment     = "${var.scale_factor_down}"
   adjustment_type        = "ChangeInCapacity"
@@ -36,7 +54,7 @@ resource "aws_autoscaling_policy" "scale_policy_down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "scale_alarm_down" {
-  count               = "${var.autoscaling ? 1 : 0}"
+  count               = "${var.autoscaling && var.scaling_policy_type == "SimpleScaling" ? 1 : 0}"
   alarm_name          = "${var.name}-scale-down"
   period              = "60"
   evaluation_periods  = "${var.scale_minutes_down}"

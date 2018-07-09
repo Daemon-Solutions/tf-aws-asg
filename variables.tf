@@ -104,6 +104,24 @@ variable "autoscaling" {
   default     = false
 }
 
+variable "scaling_policy_type" {
+  description = "Autoscaling strategy"
+  type        = "string"
+  default     = "SimpleScaling"
+}
+
+variable "target_tracking_target_cpu" {
+  description = "Bool indicating whether to create target tracking scaling policy"
+  type        = "string"
+  default     = "60"
+}
+
+variable "warmup_seconds" {
+  description = "The estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics"
+  type        = "string"
+  default     = "60"
+}
+
 variable "cpu_scale_up" {
   description = "The value against which the CPU usage is compared to decide scale up action"
   type        = "string"
