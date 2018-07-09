@@ -25,7 +25,6 @@ resource "aws_autoscaling_policy" "scale_policy_up" {
 
 resource "aws_cloudwatch_metric_alarm" "scale_alarm_up" {
   count               = "${var.autoscaling && var.scaling_policy_type == "SimpleScaling" ? 1 : 0}"
-  name                = "${var.name}-scale-up"
   alarm_name          = "${var.name}-scale-up"
   period              = "60"
   evaluation_periods  = "${var.scale_minutes_up}"
