@@ -1,4 +1,10 @@
 /* Environment */
+variable "enabled" {
+  description = "Enable or disable the ASG."
+  type        = "string"
+  default     = "1"
+}
+
 variable "name" {
   description = "The desired name prefix for your ASG resources. Will also be added as the value for the 'Name' tag"
   type        = "string"
