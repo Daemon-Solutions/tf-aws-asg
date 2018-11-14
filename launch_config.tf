@@ -1,5 +1,7 @@
 // Launch Configuration
 resource "aws_launch_configuration" "lc" {
+  count = "${var.enabled ? 1 : 0}"
+
   lifecycle {
     create_before_destroy = true
   }

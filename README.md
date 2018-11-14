@@ -53,6 +53,7 @@ module "asg" {
 
 Variables marked with an * are mandatory, the others have sane defaults and can be omitted.
 
+* `enabled`\* - Enable or disable the ASG.  The functionality has been added to the resource within the module as counts cannot be used on a module itself.
 * `name`\* - Name given to autoscaling group and the instances it creates
 * `envname`\* - Environment name (eg,test, stage or prod)
 * `service`\* - Service name
