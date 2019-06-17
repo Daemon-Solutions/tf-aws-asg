@@ -13,15 +13,23 @@ Gives you:
 It is suggested you use `tf-aws-sg` and `tf-aws-iam-instance-profile` in conjunction with this module.
 You can create one or more ELBs with `tf-aws-elb`, and pass a list of load balancers in.
 
+## Terraform version compatibility
+
+| Module version | Terraform version |
+|----------------|-------------------|
+| 1.x.x          | 0.12.x            |
+| 0.x.x          | 0.11.x            |
+
+
 ## Usage
 
 ```
 data "template_file" "cc" {
-  template = "${file("templates/cloud-config.cfg.tpl")}"
+  template = file("templates/cloud-config.cfg.tpl")
 }
 
 data "template_file" "script" {
-  template = "${file("templates/boot.sh.tpl")}"
+  template = file("templates/boot.sh.tpl")
 }
 
 data "template_cloudinit_config" "config" {
@@ -30,12 +38,12 @@ data "template_cloudinit_config" "config" {
 
   part {
     content_type = "text/cloud-config"
-    content      = "${data.template_file.cc.rendered}"
+    content      = data.template_file.cc.rendered
   }
 
   part {
     content_type = "text/x-shellscript"
-    content      = "${data.template_file.script.rendered}"
+    content      = data.template_file.script.rendered
   }
 }
 
@@ -45,7 +53,7 @@ module "asg" {
   envname   = "test"
   service   = "varnish"
   ami_id    = "ami-a85165db"
-  user_data = "${data.template_cloudinit_config.config.rendered}"
+  user_data = data.template_cloudinit_config.config.rendered
 }
 ```
 
