@@ -1,7 +1,7 @@
 resource "aws_security_group" "allow_all" {
   name        = "allow_all"
   description = "Allow all inbound traffic"
-  vpc_id      = "${module.vpc.vpc_id}"
+  vpc_id      = module.vpc.vpc_id
 
   ingress {
     from_port   = 0
@@ -40,11 +40,11 @@ module "public_asg" {
   name                        = "awspec-testing-public"
   envname                     = "foo"
   service                     = "bar"
-  subnets                     = ["${module.vpc.public_subnets}"]
-  security_groups             = ["${aws_security_group.allow_all.id}"]
+  subnets                     = module.vpc.public_subnet_ids
+  security_groups             = [aws_security_group.allow_all.id]
   ami_id                      = "ami-a85165db"
   associate_public_ip_address = true
-  user_data                   = "${data.template_cloudinit_config.config.rendered}"
+  user_data                   = data.template_cloudinit_config.config.rendered
 }
 
 module "private_asg" {
@@ -52,8 +52,8 @@ module "private_asg" {
   name                        = "awspec-testing-private"
   envname                     = "foo"
   service                     = "bar"
-  subnets                     = ["${module.vpc.private_subnets}"]
-  security_groups             = ["${aws_security_group.allow_all.id}"]
+  subnets                     = module.vpc.private_subnet_ids
+  security_groups             = [aws_security_group.allow_all.id]
   ami_id                      = "ami-a85165db"
   associate_public_ip_address = false
   min                         = 1
@@ -61,7 +61,7 @@ module "private_asg" {
   autoscaling                 = true
   cpu_scale_up                = "50"
   cpu_scale_down              = "20"
-  user_data                   = "${data.template_cloudinit_config.config.rendered}"
+  user_data                   = data.template_cloudinit_config.config.rendered
 }
 
 module "private_asg_tracked_scaling" {
@@ -69,8 +69,8 @@ module "private_asg_tracked_scaling" {
   name                        = "awspec-testing-tracked-private"
   envname                     = "foo"
   service                     = "bar"
-  subnets                     = ["${module.vpc.private_subnets}"]
-  security_groups             = ["${aws_security_group.allow_all.id}"]
+  subnets                     = module.vpc.private_subnet_ids
+  security_groups             = [aws_security_group.allow_all.id]
   ami_id                      = "ami-a85165db"
   associate_public_ip_address = false
   min                         = 1
@@ -79,17 +79,17 @@ module "private_asg_tracked_scaling" {
   scaling_policy_type         = "TargetTrackingScaling"
   target_tracking_target_cpu  = "60"
   warmup_seconds              = "30"
-  user_data                   = "${data.template_cloudinit_config.config.rendered}"
+  user_data                   = data.template_cloudinit_config.config.rendered
 }
 
 output "public_asg_id" {
-  value = "${module.public_asg.asg_id}"
+  value = module.public_asg.asg_id
 }
 
 output "private_asg_id" {
-  value = "${module.private_asg.asg_id}"
+  value = module.private_asg.asg_id
 }
 
 output "security_group_id" {
-  value = "${aws_security_group.allow_all.id}"
+  value = aws_security_group.allow_all.id
 }

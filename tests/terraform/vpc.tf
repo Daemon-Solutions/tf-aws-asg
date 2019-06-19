@@ -1,20 +1,28 @@
 module "vpc" {
-  source               = "git::ssh://git@gogs.bashton.net/Bashton-Terraform-Modules/tf-aws-vpc-natgw.git?ref=v1.0.0"
-  name                 = "awspec-testing"
-  ipv4_cidr            = "10.0.0.0/16"
-  public_ipv4_subnets  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  private_ipv4_subnets = ["10.0.11.0/24", "10.0.12.0/24", "10.0.13.0/24"]
-  azs                  = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  source = "git@github.com:claranet/terraform-aws-vpc-modules.git?ref=v1.0.0"
+
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+
+  availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+
+  vpc_cidr_block = "10.0.0.0/16"
+
+  public_cidr_block   = "10.0.1.0/17"
+  public_subnet_count = 3
+
+  private_cidr_block   = "10.0.128.0/17"
+  private_subnet_count = 3
 }
 
 output "vpc_id" {
-  value = "${module.vpc.vpc_id}"
+  value = module.vpc.vpc_id
 }
 
 output "vpc_private_subnet_ids" {
-  value = ["${module.vpc.private_subnets}"]
+  value = [module.vpc.private_subnet_ids]
 }
 
 output "vpc_public_subnet_ids" {
-  value = ["${module.vpc.public_subnets}"]
+  value = [module.vpc.public_subnet_ids]
 }
