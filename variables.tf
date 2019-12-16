@@ -237,3 +237,10 @@ variable "extra_tags" {
   type        = "list"
   default     = []
 }
+
+
+variable "suspended_processes" {
+  description = "List of process to suspend for the ASG"
+  type        = "list"
+  default     = []
+}
