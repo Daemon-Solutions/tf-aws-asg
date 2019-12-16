@@ -18,6 +18,8 @@ resource "aws_autoscaling_group" "asg" {
 
   enabled_metrics = ["${var.enabled_metrics}"]
 
+  suspended_processes = ["${var.suspended_processes}"]
+
   tags = [
     {
       key                 = "Name"
