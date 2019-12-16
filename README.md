@@ -99,6 +99,7 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 * `enabled_metrics` - A list of metrics to collect. The allowed values are GroupMinSize, GroupMaxSize, GroupDesiredCapacity, GroupInServiceInstances, GroupPendingInstances, GroupStandbyInstances, GroupTerminatingInstances, GroupTotalInstances (default: all of them)
 * `patch_group` - Adds a `Patch Group` tag to the ASG with this value
 * `extra_tags` - Extra tags for the ASG
+* `suspended_processes` - List of processes to suspend for the ASG
 
 ## Outputs
 

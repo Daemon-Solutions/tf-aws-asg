@@ -237,3 +237,9 @@ variable "extra_tags" {
   type        = list(any)
   default     = []
 }
+
+variable "suspended_processes" {
+  description = "List of processes to suspend for the ASG"
+  type        = list(string)
+  default     = []
+}
