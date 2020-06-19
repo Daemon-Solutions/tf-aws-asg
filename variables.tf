@@ -232,6 +232,12 @@ variable "patch_group" {
   default     = ""
 }
 
+variable "use_default_tags" {
+  description = "Bool indicating whether to apply default tags"
+  type        = bool
+  default     = true
+}
+
 variable "extra_tags" {
   description = "A list of extra tags for the ASG"
   type        = list(any)

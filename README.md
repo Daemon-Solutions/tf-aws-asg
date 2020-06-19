@@ -98,7 +98,8 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 * `target_group_arns` - A list of aws_alb_target_group ARNs, for use with Application Load Balancing
 * `enabled_metrics` - A list of metrics to collect. The allowed values are GroupMinSize, GroupMaxSize, GroupDesiredCapacity, GroupInServiceInstances, GroupPendingInstances, GroupStandbyInstances, GroupTerminatingInstances, GroupTotalInstances (default: all of them)
 * `patch_group` - Adds a `Patch Group` tag to the ASG with this value
-* `extra_tags` - Extra tags for the ASG
+* `extra_tags` - Extra tags for the ASG (default: `[]`)
+* `use_default_tags` - Boolean indicating whether to use default tags (default: `true`)
 * `suspended_processes` - List of processes to suspend for the ASG
 
 ## Outputs

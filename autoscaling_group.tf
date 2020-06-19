@@ -20,7 +20,12 @@ resource "aws_autoscaling_group" "asg" {
 
   suspended_processes = var.suspended_processes
 
-  tags = flatten([
+  tags = local.tags
+}
+
+
+locals {
+  default_tags = [
     {
       key                 = "Name"
       value               = var.name
@@ -35,16 +40,20 @@ resource "aws_autoscaling_group" "asg" {
       key                 = "Service"
       value               = var.service
       propagate_at_launch = true
-    },
-    var.extra_tags,
-    slice(
-      [{
-        "key"                 = "Patch Group"
-        "value"               = var.patch_group
-        "propagate_at_launch" = true
-      }],
-      var.patch_group == "" ? 1 : 0,
-      1,
-    ),
-  ])
+    }
+  ]
+
+  patch_group_tag = [
+    {
+      "key"                 = "Patch Group"
+      "value"               = var.patch_group
+      "propagate_at_launch" = true
+    }
+  ]
+
+  tags = concat(
+    var.use_default_tags ? local.default_tags : [],
+    var.patch_group != "" ? local.patch_group_tag : [],
+    var.extra_tags
+  )
 }
