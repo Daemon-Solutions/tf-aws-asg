@@ -24,6 +24,8 @@ resource "aws_autoscaling_group" "asg" {
   // Use the Name from the launch config created above
   launch_configuration = "${aws_launch_configuration.lc.name}"
 
+  enabled_metrics = ["${var.enabled_metrics}"]
+
   min_size = "${var.asg_min}"
   max_size = "${var.asg_max}"
 

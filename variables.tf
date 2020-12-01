@@ -22,3 +22,19 @@ variable "asg_min" { default = 0 }
 variable "asg_max" { default = 1 }
 variable "health_check_type" { default = "EC2" }
 variable "health_check_grace_period" { default = 300 }
+
+variable "enabled_metrics" {
+  description = "A list of metrics to collect. The allowed values are GroupMinSize, GroupMaxSize, GroupDesiredCapacity, GroupInServiceInstances, GroupPendingInstances, GroupStandbyInstances, GroupTerminatingInstances, GroupTotalInstances"
+  type        = "list"
+
+  default = [
+    "GroupMinSize",
+    "GroupMaxSize",
+    "GroupDesiredCapacity",
+    "GroupInServiceInstances",
+    "GroupPendingInstances",
+    "GroupStandbyInstances",
+    "GroupTerminatingInstances",
+    "GroupTotalInstances",
+  ]
+}
