@@ -35,19 +35,19 @@ variable "instance_type" {
 variable "root_block_device" {
   description = "Customize details about the root block device of the instance"
   type        = list(any)
-  default = []
+  default     = []
 }
 
 variable "ebs_block_device" {
   description = "Additional EBS block devices to attach to the instance"
   type        = list(any)
-  default = []
+  default     = []
 }
 
 variable "ephemeral_block_device" {
   description = "Customize Ephemeral (also known as 'Instance Store') volumes on the instance"
   type        = list(any)
-  default = []
+  default     = []
 }
 
 variable "iam_instance_profile" {
