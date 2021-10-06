@@ -4,6 +4,7 @@ resource "aws_launch_configuration" "lc" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes        = var.ignore_userdata_changes == "true" ? ["user_data"] : []
   }
 
   name_prefix                 = var.name
@@ -37,7 +38,7 @@ resource "aws_launch_configuration" "lc" {
       virtual_name = ephemeral_block_device.value.virtual_name
     }
   }
-  
+
   dynamic "root_block_device" {
     for_each = var.root_block_device
     content {

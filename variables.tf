@@ -5,6 +5,12 @@ variable "enabled" {
   default     = "1"
 }
 
+variable "ignore_userdata_changes" {
+  description = "Set to true to prevent terraform from destroying instances as a result of user_data update"
+  type        = bool
+  default     = false
+}
+
 variable "name" {
   description = "The desired name prefix for your ASG resources. Will also be added as the value for the 'Name' tag"
   type        = string
@@ -35,19 +41,19 @@ variable "instance_type" {
 variable "root_block_device" {
   description = "Customize details about the root block device of the instance"
   type        = list(any)
-  default = []
+  default     = []
 }
 
 variable "ebs_block_device" {
   description = "Additional EBS block devices to attach to the instance"
   type        = list(any)
-  default = []
+  default     = []
 }
 
 variable "ephemeral_block_device" {
   description = "Customize Ephemeral (also known as 'Instance Store') volumes on the instance"
   type        = list(any)
-  default = []
+  default     = []
 }
 
 variable "iam_instance_profile" {
