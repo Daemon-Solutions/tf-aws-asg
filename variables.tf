@@ -5,12 +5,6 @@ variable "enabled" {
   default     = "1"
 }
 
-variable "ignore_userdata_changes" {
-  description = "Set to true to prevent terraform from destroying instances as a result of user_data update"
-  type        = bool
-  default     = false
-}
-
 variable "name" {
   description = "The desired name prefix for your ASG resources. Will also be added as the value for the 'Name' tag"
   type        = string
