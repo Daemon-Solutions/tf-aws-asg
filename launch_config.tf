@@ -4,7 +4,7 @@ resource "aws_launch_configuration" "lc" {
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes        = var.ignore_userdata_changes == "true" ? ["user_data"] : []
+    ignore_changes        = [user_data]
   }
 
   name_prefix                 = var.name
