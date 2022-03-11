@@ -8,6 +8,7 @@ resource "aws_launch_configuration" "lc" {
   }
 
   name_prefix                 = var.name
+  name                        = var.full_name
   security_groups             = var.security_groups
   image_id                    = var.ami_id
   instance_type               = var.instance_type

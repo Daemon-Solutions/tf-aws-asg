@@ -8,6 +8,13 @@ variable "enabled" {
 variable "name" {
   description = "The desired name prefix for your ASG resources. Will also be added as the value for the 'Name' tag"
   type        = string
+  default     = null
+}
+
+variable "full_name" {
+  description = "Full name of the resource (as opposed to prefix), in order to retain laguna compatibility"
+  type        = string
+  default     = null
 }
 
 variable "envname" {
