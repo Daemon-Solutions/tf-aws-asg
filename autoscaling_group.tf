@@ -28,7 +28,7 @@ locals {
   default_tags = [
     {
       key                 = "Name"
-      value               = var.name
+      value               = var.name != null ? var.name : var.full_name
       propagate_at_launch = true
     },
     {
