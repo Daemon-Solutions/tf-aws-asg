@@ -4,9 +4,13 @@ resource "aws_autoscaling_group" "asg" {
   name                = var.name != null ? var.name : var.full_name
   vpc_zone_identifier = var.subnets
 
-  launch_configuration = join("", aws_launch_configuration.lc.*.id)
-  load_balancers       = var.load_balancers
-  target_group_arns    = var.target_group_arns
+  launch_template {
+    id      = aws_launch_template.lt[0].id
+    version = "$Latest"
+  }
+
+  load_balancers    = var.load_balancers
+  target_group_arns = var.target_group_arns
 
   min_size             = var.min
   max_size             = var.max
