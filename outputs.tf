@@ -1,5 +1,5 @@
 output "launch_config_id" {
-  value = join("", aws_launch_configuration.lc.*.id)
+  value = join("", aws_launch_template.lt.*.id)
 }
 
 output "asg_id" {
