@@ -14,6 +14,7 @@ resource "aws_autoscaling_group" "asg" {
 
   min_size             = var.min
   max_size             = var.max
+  desired_capacity     = var.desired_capacity == "" ? var.min : var.desired_capacity
   default_cooldown     = var.cooldown
   termination_policies = var.termination_policies
 

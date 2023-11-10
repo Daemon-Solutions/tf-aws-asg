@@ -79,6 +79,7 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 * `detailed_monitoring` - If false only add machine stats to CloudWatch every 5 minutes (default: `true`)
 * `min` - Minimum number of instances (default: `1`)
 * `max` - Maximum number of instances (default: `1`)
+* `desired_capacity` - ASG Desired Capacity (default: `null`)
 * `autoscaling` - Boolean, whether to enable CPU based auto scaling
 * `scaling_policy_type` - String, auto scaling policy type, Supports "SimpleScaling" or "TargetTrackingScaling" (default: `SimpleScaling`)
 * `target_tracking_target_cpu` - String, when scaling_policy_type set to "TargetTrackingScaling", which CPU level to track at (default: `60`)

@@ -256,3 +256,10 @@ variable "suspended_processes" {
   type        = list(string)
   default     = []
 }
+
+#SD
+variable "desired_capacity" {
+  description = "ASG Desired Capacity"
+  type        = string
+  default     = ""
+}
