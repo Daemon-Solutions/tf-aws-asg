@@ -41,22 +41,8 @@ variable "instance_type" {
 
 variable "ebs_block_device" {
   description = "Specify volumes to attach to the instance besides the volumes specified by the AMI"
-
-  type = list(object({
-    device_name  = optional(string)
-    no_device    = optional(bool)
-    virtual_name = optional(string)
-    ebs = object({
-      delete_on_termination = optional(bool)
-      encrypted             = optional(bool)
-      iops                  = optional(number)
-      throughput            = optional(number)
-      kms_key_id            = optional(string)
-      snapshot_id           = optional(string)
-      volume_size           = optional(number)
-      volume_type           = optional(string)
-    })
-  }))
+  type        = list(any)
+  default     = []
 }
 
 variable "ephemeral_block_device" {
