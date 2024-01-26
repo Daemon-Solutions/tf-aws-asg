@@ -39,16 +39,24 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "root_block_device" {
-  description = "Customize details about the root block device of the instance"
-  type        = list(any)
-  default     = []
-}
-
 variable "ebs_block_device" {
-  description = "Additional EBS block devices to attach to the instance"
-  type        = list(any)
-  default     = []
+  description = "Specify volumes to attach to the instance besides the volumes specified by the AMI"
+
+  type = list(object({
+    device_name  = optional(string)
+    no_device    = optional(bool)
+    virtual_name = optional(string)
+    ebs = object({
+      delete_on_termination = optional(bool)
+      encrypted             = optional(bool)
+      iops                  = optional(number)
+      throughput            = optional(number)
+      kms_key_id            = optional(string)
+      snapshot_id           = optional(string)
+      volume_size           = optional(number)
+      volume_type           = optional(string)
+    })
+  }))
 }
 
 variable "ephemeral_block_device" {

@@ -70,8 +70,10 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 * `security_groups`\* - List of security groups to use
 * `user_data` - User data
 * `instance_type` - Instance type to use (default: `t2.micro`)
-* `root_block_device` - Customize details about the root block device of the instance (default: `[]`)
 * `ebs_block_device` - Additional EBS block devices to attach to the instance (default: `[]`)
+
+* `ebs_block_device` - Specify volumes to attach to the instance besides the volumes specified by the AMI | <pre>list(object({<br>    device_name  = optional(string)<br>    no_device    = optional(bool)<br>    virtual_name = optional(string)<br>    ebs = object({<br>      delete_on_termination = optional(bool)<br>      encrypted             = optional(bool)<br>      iops                  = optional(number)<br>      throughput            = optional(number)<br>      kms_key_id            = optional(string)<br>      snapshot_id           = optional(string)<br>      volume_size           = optional(number)<br>      volume_type           = optional(string)<br>    })<br>  }))</pre> | `[]` | no |
+
 * `ephemeral_block_device` - Customize Ephemeral (also known as 'Instance Store') volumes on the instance (default: `[]`)
 * `iam_instance_profile` - IAM instance profile to attach
 * `key_name` - SSH key to use
