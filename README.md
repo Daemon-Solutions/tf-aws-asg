@@ -104,6 +104,7 @@ Variables marked with an * are mandatory, the others have sane defaults and can 
 * `extra_tags` - Extra tags for the ASG (default: `[]`)
 * `use_default_tags` - Boolean indicating whether to use default tags (default: `true`)
 * `suspended_processes` - List of processes to suspend for the ASG
+* `update_default_version` - Update Default Template Version (default: `true`)
 
 ## Outputs
 
