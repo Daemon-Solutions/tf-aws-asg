@@ -257,3 +257,11 @@ variable "desired_capacity" {
   type        = string
   default     = ""
 }
+
+
+#SD-3116
+variable "update_default_version" {
+  description = "Update Default Template Version"
+  type        = bool
+  default     = true
+}
