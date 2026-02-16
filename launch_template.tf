@@ -27,6 +27,7 @@ resource "aws_launch_template" "lt" {
     }
   }
 
+  update_default_version = var.update_default_version
   network_interfaces {
     device_index                = 0
     associate_public_ip_address = var.associate_public_ip_address

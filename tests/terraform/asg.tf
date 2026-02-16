@@ -25,15 +25,7 @@ resource "aws_security_group" "allow_all" {
   }
 }
 
-data "template_cloudinit_config" "config" {
-  gzip          = true
-  base64_encode = true
 
-  part {
-    content_type = "text/x-shellscript"
-    content      = "echo baz"
-  }
-}
 
 module "public_asg" {
   source                      = "../../"
@@ -44,7 +36,7 @@ module "public_asg" {
   security_groups             = [aws_security_group.allow_all.id]
   ami_id                      = "ami-a85165db"
   associate_public_ip_address = true
-  user_data                   = data.template_cloudinit_config.config.rendered
+  user_data                   = base64encode("#!/bin/bash\necho baz")
 }
 
 module "private_asg" {
@@ -61,7 +53,7 @@ module "private_asg" {
   autoscaling                 = true
   cpu_scale_up                = "50"
   cpu_scale_down              = "20"
-  user_data                   = data.template_cloudinit_config.config.rendered
+  user_data                   = base64encode("#!/bin/bash\necho baz")
 }
 
 module "private_asg_tracked_scaling" {
@@ -79,7 +71,7 @@ module "private_asg_tracked_scaling" {
   scaling_policy_type         = "TargetTrackingScaling"
   target_tracking_target_cpu  = "60"
   warmup_seconds              = "30"
-  user_data                   = data.template_cloudinit_config.config.rendered
+  user_data                   = base64encode("#!/bin/bash\necho baz")
 }
 
 output "public_asg_id" {
